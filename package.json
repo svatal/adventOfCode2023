@@ -1,0 +1,19 @@
+{
+  "name": "advent_of_code_2023",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "next": "ts-node ./scripts/next",
+    "start:dev": "nodemon"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "*",
+    "nodemon": "*",
+    "ts-node": "*",
+    "typescript": "*"
+  }
+}
