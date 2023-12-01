@@ -5,7 +5,8 @@ const index = fs.readFileSync("./src/index.ts", "utf-8");
 const firstLine = index.split("\n")[0];
 const start = firstLine.indexOf("./") + 2;
 const actual = firstLine.substring(start, start + 2);
-const next = (+actual + 1).toString();
+let next = (+actual + 1).toString();
+if (next.length === 1) next = "0" + next;
 
 console.log(`copying ${next}-input.ts`);
 fs.copyFileSync("./src/template-input.ts", `./src/${next}-input.ts`);
