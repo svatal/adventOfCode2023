@@ -36,3 +36,7 @@ export function toDictionary<T, U>(
     return c;
   }, {} as Record<string, U>);
 }
+
+export function isDefined<T>(t: T | undefined): t is T {
+  return t !== undefined;
+}
