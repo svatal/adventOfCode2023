@@ -40,3 +40,7 @@ export function toDictionary<T, U>(
 export function isDefined<T>(t: T | undefined): t is T {
   return t !== undefined;
 }
+
+export function arrayEquals<T>(a: T[], b: T[]): boolean {
+  return a.length === b.length && a.every((v, i) => v === b[i]);
+}
