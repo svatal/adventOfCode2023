@@ -1,6 +1,6 @@
 // import { testInput as input } from "./08-input";
 import { input } from "./08-input";
-import { lcm } from "./utils/util";
+import { everything, mergeTargets } from "./utils/merge";
 
 export function doIt(progress: (...params: any[]) => void) {
   const [instructionsS, nodesS] = input.split(`\n\n`);
@@ -28,7 +28,7 @@ export function doIt(progress: (...params: any[]) => void) {
   const first = steps;
 
   let toMatch = [...nodes.values()].filter((n) => n.name.endsWith("A"));
-  let result = getTargets(toMatch.pop()!, nodes, instructions);
+  let result = everything;
   while (toMatch.length) {
     const targets = getTargets(toMatch.pop()!, nodes, instructions);
     result = mergeTargets(result, targets);
@@ -43,12 +43,6 @@ interface Node {
   name: string;
   left: string;
   right: string;
-}
-
-interface Target {
-  offset: number;
-  period: number;
-  targets: number[];
 }
 
 function getTargets(
@@ -83,24 +77,4 @@ function getTargets(
       targets.push(steps);
     }
   }
-}
-
-function mergeTargets(a: Target, b: Target): Target {
-  const period = lcm(a.period, b.period);
-  const offset = Math.max(a.offset, b.offset);
-  const targets: number[] = [];
-  for (
-    let currentOffset = a.offset;
-    currentOffset < period;
-    currentOffset += a.period
-  ) {
-    a.targets.forEach((t) => {
-      const target = t + currentOffset;
-      const bCandidate = (target - b.offset) % b.period;
-      if (b.targets.includes(bCandidate)) {
-        targets.push(target - offset);
-      }
-    });
-  }
-  return { period, offset, targets };
 }
