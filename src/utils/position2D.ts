@@ -40,9 +40,9 @@ export function neighbors8(p: IPosition): IPosition[] {
     { x: x - 1, y: y - 1 },
   ];
 }
-export function existIn(map: number[][]) {
+export function existIn<T>(map: T[][]) {
   return (pos: IPosition): pos is ICheckedPosition =>
-    map[pos.y] !== undefined && map[pos.y][pos.x] !== undefined;
+    map[pos.y]?.[pos.x] !== undefined;
 }
 
 export function valueInMap<T>(
